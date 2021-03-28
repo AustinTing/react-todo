@@ -10,8 +10,22 @@ import FilterButton from "./components/FilterButton";
 function App(props) {
   const [tasks, setTasks] = useState(props.tasks);
 
+  function deleteTask(id) {
+    const remainingTasks = tasks.filter(task => id !== task.id);
+    setTasks(remainingTasks);
+  }
+
   function toggleTaskCompleted(id) {
-    console.log(tasks[0])
+    const updatedTasks = tasks.map(task => {
+      // if this task has the same ID as the edited task
+      if (id === task.id) {
+        // use object spread to make a new object
+        // whose `completed` prop has been inverted
+        return {...task, completed: !task.completed}
+      }
+      return task;
+    });
+    setTasks(updatedTasks);
   }
 
   // useEffect(()=> {
@@ -25,6 +39,7 @@ function App(props) {
       completed={task.completed}
       key={task.id}
       toggleTaskCompleted={toggleTaskCompleted}
+      deleteTask={deleteTask}
     />
   ));
 
