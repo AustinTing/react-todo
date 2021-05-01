@@ -1,6 +1,6 @@
 const assert = require('assert')
 
-let title = 'TODOList'
+let title = 'ToDoList'
 
 describe('View',function(){
   describe('Title',function(){
